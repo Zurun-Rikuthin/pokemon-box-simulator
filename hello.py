@@ -31,5 +31,3 @@ with app.test_request_context():
     print(url_for("hello_world"))
     print(url_for("show_user_profile", username="John Doe"))
     print(url_for("show_post", post_id="13"))
-    
-    

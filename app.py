@@ -1,16 +1,17 @@
-# app.property
+from flask import Flask
+from extensions import db
+import models
 
-from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+def create_app():
+    app = Flask(__name__)
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
+    db.init_app(app)
 
-db = SQLAlchemy(app)
-
-from models.user import User
-
-with app.app_context():
-    db.create_all()
-    print("Created database")
+    with app.app_context():
+        db.create_all()
+        print("Created database")
     
+    return app
+
+app = create_app()
